@@ -26,7 +26,7 @@ class SearchBar extends Component {
 
                 <div className="icon-container middle" onClick={this.onSearchClick}>
                     <i
-                        className="fa fa-plus-circle"
+                        className="fa fa-search"
                         aria-hidden="true">
                     </i>
                 </div>
