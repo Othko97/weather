@@ -1,0 +1,18 @@
+.current-weather-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.weather-card {
+    width: 10em;
+    height: 10em;
+    padding: 1em 1em;
+    letter-spacing: 0.05em;
+}
+
+.weather-card .wi {
+    font-size: 2em;
+    color: #DB2B39;
+}
