@@ -26,7 +26,7 @@ const CurrentWeatherDetail = props => {
 
             <div className="weather-card">
                 <h3>Pressure</h3>
-                <h3>{weatherData.main.pressure}</h3>
+                <h3>{weatherData.main.pressure} hPa</h3>
                 <i className="wi wi-barometer"></i>
             </div>
 
