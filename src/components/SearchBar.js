@@ -1,9 +1,11 @@
+// Imports
 import React, { Component } from 'react';
 import './css/SearchBar.css';
 
 class SearchBar extends Component {
     constructor(props) {
         super(props);
+        // Set initial state.
         this.state = { locationSearchTerm: '' };
     }
 
@@ -38,15 +40,20 @@ class SearchBar extends Component {
         )
     }
 
+    // Handle click of search button.
     onSearchClick = () => {
+        // Calls getWeatherByLocation function with the current search term as an argument.
         this.props.getWeatherByLocation(this.state.locationSearchTerm);
+        // Resets locationSearchTerm.
         this.setState({ locationSearchTerm: '' });
     }
-
+    
+    // Handle click of location button by calling getWeatherByCoords function with current coordinates.
     onLocationClick = () => {
         this.props.getWeatherByCoords(this.props.location.latitude, this.props.location.longitude);
     }
 
+    // Handles an enter key press (same as onSearchClick but with enter, not a click.)
     onKeyPress = (e) => {
         if (e.key === 'Enter') {
             this.props.getWeatherByLocation(this.state.locationSearchTerm);

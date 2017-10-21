@@ -1,3 +1,4 @@
+// Imports
 import React, { Component } from 'react';
 import './css/CurrentWeatherDetail.css';
 
@@ -5,6 +6,7 @@ class CurrentWeatherDetail extends Component {
 
     constructor(props) {
         super(props);
+        // Set initial state.
         this.state = {
             timeOfDay: '',
             sunriseTime: '',
@@ -12,37 +14,45 @@ class CurrentWeatherDetail extends Component {
         };
     }
 
+    // Lifecycle method.
     componentWillReceiveProps(nextProps) {
-        if (nextProps.weatherData.sys !== undefined) {
+        if (nextProps.weatherData.sys !== undefined) { // Checks if props has weatherData information or not, runs the following if it is present.
+            // Initialise an object with sunrise and sunset times of target location.
             let sunTimes = {sunriseTime: nextProps.weatherData.sys.sunrise, sunsetTime: nextProps.weatherData.sys.sunrise};
-            let timeOfDay = this.compareTimes(new Date(), sunTimes.sunriseTime, sunTimes.sunsetTime);
+            // Compares current time with passed in times to check whether it is day or night.
+            let timeOfDay = this.returnTimeOfDay(new Date(), sunTimes.sunriseTime, sunTimes.sunsetTime);
+            // Converts times from UNIX timestamp to actual times, correcting for single digits.
             let sunriseTime = this.returnTime(new Date(sunTimes.sunriseTime * 1000));
             let sunsetTime = this.returnTime(new Date(sunTimes.sunsetTime * 1000));
 
+            // Sets state.
             this.setState({ timeOfDay, sunriseTime, sunsetTime });
             return;
         }
     }
 
     returnTime(DateObject) {
-        let time = ``;
+        // Gets the minutes of the passed in Date Object, and converts to a string.
         let minutes = DateObject.getMinutes().toString();
+        // If statement to check if minutes is a single number, and to add a 0 in front if that is the case.
         if (minutes.length === 1) {
             minutes = `0${minutes}`;
         }
+        // Get hours as string.
         let hours = DateObject.getHours().toString();
         return `${hours}:${minutes}`
     }
 
-    compareTimes(DateObject, sunrise, sunset) {
+    returnTimeOfDay(DateObject, sunrise, sunset) {
+        // Gets timestamp of passed in object.
         let timestamp = DateObject.getTime();
+        // Removes last three digits of timestamp, as timestamps from the API do not have them.
         timestamp = Math.floor(timestamp / 1e03);
+        // Compares times, and returns the corresponding time of day.
         if (timestamp < sunrise || timestamp > sunset) {
-            let timeOfDay = 'night';
-            return timeOfDay;
+            return 'night';
         } else {
-            let timeOfDay = 'day';
-            return timeOfDay;
+            return 'day';
         }
     }
 
