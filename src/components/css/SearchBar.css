@@ -44,6 +44,7 @@
 }
 
 .middle {
+    cursor: pointer;
     border-radius: 0;
     border-left: 0;
 }

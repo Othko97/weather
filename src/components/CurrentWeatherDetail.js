@@ -11,14 +11,12 @@ class CurrentWeatherDetail extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
         if (nextProps.weatherData.sys !== undefined) {
             let date = new Date();
             let timeOfDay = this.compareTimes(date, nextProps.weatherData.sys.sunrise, nextProps.weatherData.sys.sunset);
             this.setState({timeOfDay});
             return;
         }
-        console.log('should only run if undefined');
     }
 
     compareTimes(curTimeObject, sunrise, sunset) {
@@ -43,8 +41,8 @@ class CurrentWeatherDetail extends Component {
 
              <div className="weather-card">
                  <h3>Weather</h3>
-                 <h3>{this.props.weatherData.weather[0].main}</h3>
-                 <i className={`wi wi-${this.props.weatherData.weather[0].main.toLowerCase()}`}></i>
+                 <h3>{this.props.weatherData.weather[0].description}</h3>
+                 <i className={`wi wi-owm-${this.state.timeOfDay}-${this.props.weatherData.weather[0].id}`}></i>
              </div>
 
              <div className="weather-card">
