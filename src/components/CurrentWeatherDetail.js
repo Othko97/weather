@@ -7,42 +7,35 @@ class CurrentWeatherDetail extends Component {
         super(props);
         this.state = {
             timeOfDay: '',
-            sunrise: '',
-            sunset: ''
+            sunriseTime: '',
+            sunsetTime: ''
         };
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.weatherData.sys !== undefined) {
-            let date = new Date();
-            let timeOfDay = this.compareTimes(date, nextProps.weatherData.sys.sunrise, nextProps.weatherData.sys.sunset);
+            let sunTimes = {sunriseTime: nextProps.weatherData.sys.sunrise, sunsetTime: nextProps.weatherData.sys.sunrise};
+            let timeOfDay = this.compareTimes(new Date(), sunTimes.sunriseTime, sunTimes.sunsetTime);
+            let sunriseTime = this.returnTime(new Date(sunTimes.sunriseTime * 1000));
+            let sunsetTime = this.returnTime(new Date(sunTimes.sunsetTime * 1000));
 
-            let sunriseObj = new Date(nextProps.weatherData.sys.sunrise * 1000);
-
-            let sunriseMinutes = sunriseObj.getMinutes().toString();
-            if (sunriseMinutes.length === 1) {
-                sunriseMinutes = `0${sunriseMinutes}`;
-            };
-
-            let sunrise = `${sunriseObj.getHours()}:${sunriseMinutes}`;
-
-            let sunsetObj = new Date(nextProps.weatherData.sys.sunset * 1000);
-
-            let sunsetMinutes = sunsetObj.getMinutes().toString();
-            if (sunsetMinutes.length === 1) {
-                sunsetMinutes = `0${sunsetMinutes}`
-            };
-
-            let sunset = `${sunsetObj.getHours()}:${sunsetMinutes}`;
-
-            this.setState({ timeOfDay, sunrise, sunset });
-
+            this.setState({ timeOfDay, sunriseTime, sunsetTime });
             return;
         }
     }
 
-    compareTimes(curTimeObject, sunrise, sunset) {
-        let timestamp = curTimeObject.getTime();
+    returnTime(DateObject) {
+        let time = ``;
+        let minutes = DateObject.getMinutes().toString();
+        if (minutes.length === 1) {
+            minutes = `0${minutes}`;
+        }
+        let hours = DateObject.getHours().toString();
+        return `${hours}:${minutes}`
+    }
+
+    compareTimes(DateObject, sunrise, sunset) {
+        let timestamp = DateObject.getTime();
         timestamp = Math.floor(timestamp / 1e03);
         if (timestamp < sunrise || timestamp > sunset) {
             let timeOfDay = 'night';
@@ -97,13 +90,13 @@ class CurrentWeatherDetail extends Component {
 
                     <div className="weather-card">
                         <h3>Sunrise</h3>
-                        <h3>{this.state.sunrise}</h3>
+                        <h3>{this.state.sunriseTime}</h3>
                         <i className="wi wi-sunrise"></i>
                     </div>
 
                     <div className="weather-card">
                         <h3>Sunset</h3>
-                        <h3>{this.state.sunset}</h3>
+                        <h3>{this.state.sunsetTime}</h3>
                         <i className="wi wi-sunset"></i>
                     </div>
 
