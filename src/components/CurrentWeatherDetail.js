@@ -5,10 +5,27 @@ class CurrentWeatherDetail extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            time: {},
+            timeString: ''
+        };
+    }
+
+    componentWillMount() {
+        let date = new Date();
+        let time = {
+            hours: date.getHours(),
+            minutes: date.getMinutes()
+        }
+        let timeString = `${time.hours} : ${time.minutes}`;
+        this.setState({
+            time,
+            timeString
+        })
     }
 
     render() {
-        if (this.props.weatherData.weather === undefined) {
+        if (this.props.weatherData.weather === undefined || this.state.time === {}) {
             return null;
         }
 
