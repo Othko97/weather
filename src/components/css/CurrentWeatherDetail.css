@@ -26,3 +26,9 @@
 .title-container h1 {
     margin-right: 0;
 }
+
+@media (max-width: 767px) {
+    .weather-card {
+        width: 12em;
+    }
+}
