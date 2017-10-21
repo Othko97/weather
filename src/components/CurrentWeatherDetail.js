@@ -6,26 +6,35 @@ class CurrentWeatherDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            time: {},
-            timeString: ''
+            timeOfDay : ''
         };
     }
 
-    componentWillMount() {
-        let date = new Date();
-        let time = {
-            hours: date.getHours(),
-            minutes: date.getMinutes()
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        if (nextProps.weatherData.sys !== undefined) {
+            let date = new Date();
+            let timeOfDay = this.compareTimes(date, nextProps.weatherData.sys.sunrise, nextProps.weatherData.sys.sunset);
+            this.setState({timeOfDay});
+            return;
         }
-        let timeString = `${time.hours} : ${time.minutes}`;
-        this.setState({
-            time,
-            timeString
-        })
+        console.log('should only run if undefined');
+    }
+
+    compareTimes(curTimeObject, sunrise, sunset) {
+        let timestamp = curTimeObject.getTime();
+        timestamp = Math.floor(timestamp / 1e03);        
+        if (timestamp < sunrise || timestamp > sunset) {
+            let timeOfDay = 'night';
+            return timeOfDay;
+        } else {
+            let timeOfDay = 'day';
+            return timeOfDay;
+        }
     }
 
     render() {
-        if (this.props.weatherData.weather === undefined || this.state.time === {}) {
+        if (this.props.weatherData.weather === undefined) {
             return null;
         }
 
