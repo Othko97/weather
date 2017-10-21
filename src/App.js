@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   getWeatherByCoords = (lat, lon) => {
-    axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${key}&units=metric`)
+    axios.get(`//api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${key}&units=metric`)
     .then(response => {
       console.log(response.data);
       this.setState({weatherData: response.data});
@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   getWeatherByLocation = (locationSearchTerm) => {
-    axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${locationSearchTerm}&APPID=${key}&units=metric`)
+    axios.get(`//api.openweathermap.org/data/2.5/weather?q=${locationSearchTerm}&APPID=${key}&units=metric`)
     .then(response => {
       console.log(response.data);
       this.setState({weatherData: response.data});
