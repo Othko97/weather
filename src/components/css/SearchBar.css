@@ -52,3 +52,19 @@
 .fa {
     color: #29335C;
 }
+
+@media (max-width: 767px) {
+    .search-bar-container {
+        display: flex;
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .left {
+        margin-left: 1em;
+    }
+
+    .right {
+        margin-right: 1em;
+    }
+}

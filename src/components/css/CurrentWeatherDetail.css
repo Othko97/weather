@@ -8,7 +8,7 @@
 }
 
 .weather-card {
-    width: 10em;
+    width: 15em;
     height: 10em;
     padding: 1em 1em;
     letter-spacing: 0.05em;
@@ -21,4 +21,8 @@
 
 .title-container {
     text-align: center;
+}
+
+.title-container h1 {
+    margin-right: 0;
 }
