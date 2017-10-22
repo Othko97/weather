@@ -1,9 +1,7 @@
 .search-bar-container {
     width: 50%;
-    margin-right: 21%;
     display: inline-flex;
     align-items: center;
-    justify-content: flex-start;
 }
 
 .search-bar-container input {
@@ -31,7 +29,6 @@
     border-right: none;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
-    margin-left: 4em;
     padding-right: 0.2em;
 }
 
