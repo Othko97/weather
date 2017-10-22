@@ -18,7 +18,7 @@ class CurrentWeatherDetail extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.weatherData.sys !== undefined) { // Checks if props has weatherData information or not, runs the following if it is present.
             // Initialise an object with sunrise and sunset times of target location.
-            let sunTimes = {sunriseTime: nextProps.weatherData.sys.sunrise, sunsetTime: nextProps.weatherData.sys.sunrise};
+            let sunTimes = {sunriseTime: nextProps.weatherData.sys.sunrise, sunsetTime: nextProps.weatherData.sys.sunset};
             // Compares current time with passed in times to check whether it is day or night.
             let timeOfDay = this.returnTimeOfDay(new Date(), sunTimes.sunriseTime, sunTimes.sunsetTime);
             // Converts times from UNIX timestamp to actual times, correcting for single digits.
@@ -33,14 +33,19 @@ class CurrentWeatherDetail extends Component {
 
     returnTime(DateObject) {
         // Gets the minutes of the passed in Date Object, and converts to a string.
-        let minutes = DateObject.getMinutes().toString();
-        // If statement to check if minutes is a single number, and to add a 0 in front if that is the case.
-        if (minutes.length === 1) {
-            minutes = `0${minutes}`;
-        }
+        let minutes = this.correctTime(DateObject.getMinutes().toString());
         // Get hours as string.
-        let hours = DateObject.getHours().toString();
+        let hours = this.correctTime(DateObject.getHours().toString());
         return `${hours}:${minutes}`
+    }
+
+    correctTime(timeString) {
+        if (timeString.length === 1) {
+            return `0${timeString}`;
+        }
+        else {
+            return timeString;
+        }
     }
 
     returnTimeOfDay(DateObject, sunrise, sunset) {
