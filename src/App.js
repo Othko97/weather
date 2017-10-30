@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import TopBar from './components/TopBar';
 import CurrentWeatherDetail from './components/CurrentWeatherDetail';
+import ForecastDetail from './components/ForecastDetail';
 
 // API Key
 const key = '8cd851c616011af112f1978fd7b6433a';
@@ -70,6 +71,7 @@ class App extends Component {
           weatherData={this.state.weatherData}
           location={this.state.location} />
           <CurrentWeatherDetail weatherData={this.state.weatherData} />
+          <ForecastDetail forecastData={this.state.forecastData} />
       </div>
     );
   }

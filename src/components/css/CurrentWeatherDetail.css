@@ -5,6 +5,14 @@
     text-align: center;
     flex-wrap: wrap;
     text-transform: capitalize;
+    border-bottom: 1px solid #DB2B39;
+    width:80%;
+}
+
+.weather-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .weather-card {

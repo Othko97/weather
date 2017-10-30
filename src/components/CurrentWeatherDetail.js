@@ -18,7 +18,7 @@ class CurrentWeatherDetail extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.weatherData.sys !== undefined) { // Checks if props has weatherData information or not, runs the following if it is present.
             // Initialise an object with sunrise and sunset times of target location.
-            let sunTimes = {sunriseTime: nextProps.weatherData.sys.sunrise, sunsetTime: nextProps.weatherData.sys.sunset};
+            let sunTimes = { sunriseTime: nextProps.weatherData.sys.sunrise, sunsetTime: nextProps.weatherData.sys.sunset };
             // Compares current time with passed in times to check whether it is day or night.
             let timeOfDay = this.returnTimeOfDay(new Date(), sunTimes.sunriseTime, sunTimes.sunsetTime);
             // Converts times from UNIX timestamp to actual times, correcting for single digits.
@@ -71,50 +71,52 @@ class CurrentWeatherDetail extends Component {
                 <div className="title-container">
                     <h1>Current Weather</h1>
                 </div>
-                <div className="current-weather-detail">
+                <div className="weather-container">
+                    <div className="current-weather-detail">
 
-                    <div className="weather-card">
-                        <h3>Weather</h3>
-                        <h3>{this.props.weatherData.weather[0].description}</h3>
-                        <i className={`wi wi-owm-${this.state.timeOfDay}-${this.props.weatherData.weather[0].id}`}></i>
+                        <div className="weather-card">
+                            <h3>Weather</h3>
+                            <h3>{this.props.weatherData.weather[0].description}</h3>
+                            <i className={`wi wi-owm-${this.state.timeOfDay}-${this.props.weatherData.weather[0].id}`}></i>
+                        </div>
+
+                        <div className="weather-card">
+                            <h3>Temperature</h3>
+                            <h3>{this.props.weatherData.main.temp}&#8451;</h3>
+                            <i className="wi wi-thermometer"></i>
+                        </div>
+
+                        <div className="weather-card">
+                            <h3>Pressure</h3>
+                            <h3>{this.props.weatherData.main.pressure} hPa</h3>
+                            <i className="wi wi-barometer"></i>
+                        </div>
+
+                        <div className="weather-card">
+                            <h3>Humidity</h3>
+                            <h3>{this.props.weatherData.main.humidity}%</h3>
+                            <i className="wi wi-humidity"></i>
+                        </div>
+
+                        <div className="weather-card">
+                            <h3>Wind Speed</h3>
+                            <h3>{this.props.weatherData.wind.speed}mph</h3>
+                            <i className="wi wi-owm-957"></i>
+                        </div>
+
+                        <div className="weather-card">
+                            <h3>Sunrise</h3>
+                            <h3>{this.state.sunriseTime}</h3>
+                            <i className="wi wi-sunrise"></i>
+                        </div>
+
+                        <div className="weather-card">
+                            <h3>Sunset</h3>
+                            <h3>{this.state.sunsetTime}</h3>
+                            <i className="wi wi-sunset"></i>
+                        </div>
+
                     </div>
-
-                    <div className="weather-card">
-                        <h3>Temperature</h3>
-                        <h3>{this.props.weatherData.main.temp}&#8451;</h3>
-                        <i className="wi wi-thermometer"></i>
-                    </div>
-
-                    <div className="weather-card">
-                        <h3>Pressure</h3>
-                        <h3>{this.props.weatherData.main.pressure} hPa</h3>
-                        <i className="wi wi-barometer"></i>
-                    </div>
-
-                    <div className="weather-card">
-                        <h3>Humidity</h3>
-                        <h3>{this.props.weatherData.main.humidity}%</h3>
-                        <i className="wi wi-humidity"></i>
-                    </div>
-
-                    <div className="weather-card">
-                        <h3>Wind Speed</h3>
-                        <h3>{this.props.weatherData.wind.speed}mph</h3>
-                        <i className="wi wi-owm-957"></i>
-                    </div>
-
-                    <div className="weather-card">
-                        <h3>Sunrise</h3>
-                        <h3>{this.state.sunriseTime}</h3>
-                        <i className="wi wi-sunrise"></i>
-                    </div>
-
-                    <div className="weather-card">
-                        <h3>Sunset</h3>
-                        <h3>{this.state.sunsetTime}</h3>
-                        <i className="wi wi-sunset"></i>
-                    </div>
-
                 </div>
             </div>
         )
