@@ -14,7 +14,7 @@ class App extends Component {
     //Set initial state.
     this.state = {
       weatherData : {},
-      location: {}
+      location: {},
     };
   }
 
