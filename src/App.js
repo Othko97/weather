@@ -15,6 +15,7 @@ class App extends Component {
     this.state = {
       weatherData : {},
       location: {},
+      forecastData: {}
     };
   }
 
@@ -29,6 +30,10 @@ class App extends Component {
     .then(response => {
       this.setState({weatherData: response.data});
     })
+    axios.get(`//api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=${key}&units=metric`)
+    .then(response => {
+      this.setState({forecastData: response.data});
+    })
   }
 
   // Take in location name and make a get request to the API with that name.
@@ -36,6 +41,10 @@ class App extends Component {
     axios.get(`//api.openweathermap.org/data/2.5/weather?q=${locationSearchTerm}&APPID=${key}&units=metric`)
     .then(response => {
       this.setState({weatherData: response.data});
+    })
+    axios.get(`//api.openweathermap.org/data/2.5/forecast?q=${locationSearchTerm}&APPID=${key}&units=metric`)
+    .then(response => {
+      this.setState({forecastData: response.data});
     })
   }
 
